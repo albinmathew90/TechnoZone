@@ -1,6 +1,6 @@
 # ⚡ TechZone
 
-![TechZone Banner](https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=1200&q=80)
+
 
 Welcome to **TechZone**, a modern, premium e-commerce web application dedicated to the latest and greatest in technology! From cutting-edge mobiles and powerful laptops to ultimate gaming gear, TechZone offers a seamless shopping experience for tech enthusiasts.
 
