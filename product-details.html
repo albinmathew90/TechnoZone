@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product – TechZone</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo"><i class="fas fa-bolt"></i> TechZone</a>
+      <div class="nav-search">
+        <input type="text" id="searchInput" placeholder="Search products…"/>
+        <button id="searchBtn" onclick="window.location.href='products.html'">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+      <div class="nav-right">
+        <a href="login.html" class="nav-btn btn-outline" id="loginLink">Login</a>
+        <a href="register.html" class="nav-btn btn-solid" id="registerLink">Register</a>
+        <span class="nav-user" id="navUser" style="display:none;">
+          <i class="fas fa-user-circle"></i>
+          <span id="navUserName">User</span>
+        </span>
+        <button class="nav-btn btn-logout" id="logoutBtn" style="display:none;" onclick="logoutUser()">Logout</button>
+        <a href="cart.html" class="cart-icon">
+          <i class="fas fa-shopping-cart"></i>
+          <span class="cart-count" id="cartCount">0</span>
+        </a>
+      </div>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+    <nav class="mobile-nav" id="mobileNav">
+      <a href="index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="products.html"><i class="fas fa-th-large"></i> All Products</a>
+      <a href="cart.html"><i class="fas fa-shopping-cart"></i> Cart</a>
+      <a href="login.html" id="mobileLoginLink"><i class="fas fa-sign-in-alt"></i> Login</a>
+      <a href="register.html" id="mobileRegisterLink"><i class="fas fa-user-plus"></i> Register</a>
+      <a href="#" id="mobileLogoutLink" style="display:none;" onclick="logoutUser()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </nav>
+  </header>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb container" id="breadcrumb">
+    <a href="index.html">Home</a> <i class="fas fa-chevron-right"></i>
+    <a href="products.html">Products</a> <i class="fas fa-chevron-right"></i>
+    <span id="breadcrumbName">Product</span>
+  </div>
+
+  <!-- PRODUCT DETAIL SECTION -->
+  <div class="product-detail-page container" id="productDetailPage">
+    <!-- Rendered by JS -->
+  </div>
+
+  <!-- RELATED PRODUCTS -->
+  <section class="category-section container" id="relatedSection" style="display:none;">
+    <div class="section-header">
+      <h2 class="section-title">Related Products</h2>
+      <a href="products.html" class="see-all">See All</a>
+    </div>
+    <div class="products-grid" id="relatedGrid"></div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-bottom"><p>© 2025 TechZone. All rights reserved.</p></div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+  <script>
+    // Load product based on URL param ?id=
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id'));
+      const product = products.find(p => p.id === id);
+
+      if (!product) {
+        document.getElementById('productDetailPage').innerHTML =
+          '<p class="error-msg"><i class="fas fa-exclamation-circle"></i> Product not found. <a href="products.html">Go back</a></p>';
+        return;
+      }
+
+      // Update page title and breadcrumb
+      document.title = product.name + ' – TechZone';
+      document.getElementById('breadcrumbName').textContent = product.name;
+
+      // Render product detail
+      renderProductDetail(product);
+
+      // Show related products
+      const related = products.filter(p => p.category === product.category && p.id !== product.id).slice(0, 4);
+      if (related.length > 0) {
+        document.getElementById('relatedSection').style.display = 'block';
+        renderProductGrid('relatedGrid', related);
+      }
+    })();
+  </script>
+</body>
+</html>

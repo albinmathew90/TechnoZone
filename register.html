@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register – Techno Zone</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body class="auth-page">
+
+  <header class="auth-topbar">
+    <a href="index.html" class="nav-logo"><i class="fas fa-bolt"></i> Techno Zone</a>
+  </header>
+
+  <div class="auth-container">
+    <div class="auth-card auth-card-wide">
+      <div class="auth-header">
+        <h2>Create Account</h2>
+        <p>Join Techno Zone and start shopping today!</p>
+      </div>
+
+      <!-- Register Form -->
+      <form id="registerForm" onsubmit="handleRegister(event)" novalidate>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="regFirstName"><i class="fas fa-user"></i> First Name</label>
+            <input type="text" id="regFirstName" placeholder=""/>
+            <span class="form-error" id="regFirstNameError"></span>
+          </div>
+          <div class="form-group">
+            <label for="regLastName"><i class="fas fa-user"></i> Last Name</label>
+            <input type="text" id="regLastName" placeholder=""/>
+            <span class="form-error" id="regLastNameError"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="regEmail"><i class="fas fa-envelope"></i> Email Address</label>
+          <input type="email" id="regEmail" placeholder=""/>
+          <span class="form-error" id="regEmailError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="regPhone"><i class="fas fa-phone"></i> Phone Number</label>
+          <input type="tel" id="regPhone" placeholder=""/>
+          <span class="form-error" id="regPhoneError"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="regPassword"><i class="fas fa-lock"></i> Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="regPassword" placeholder="Minimum 8 characters"/>
+            <button type="button" class="toggle-password" onclick="togglePwd('regPassword', this)">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+          <span class="form-error" id="regPasswordError"></span>
+          <!-- Password strength indicator -->
+          <div class="password-strength" id="passwordStrength">
+            <div class="strength-bar">
+              <div class="strength-fill" id="strengthFill"></div>
+            </div>
+            <span id="strengthLabel"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="regConfirmPassword"><i class="fas fa-lock"></i> Confirm Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="regConfirmPassword" placeholder="Re-enter password"/>
+            <button type="button" class="toggle-password" onclick="togglePwd('regConfirmPassword', this)">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+          <span class="form-error" id="regConfirmPasswordError"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="regTerms"/>
+            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+          </label>
+          <span class="form-error" id="regTermsError"></span>
+        </div>
+
+        <button type="submit" class="btn-auth">
+          <i class="fas fa-user-plus"></i> Create Account
+        </button>
+
+        <div class="auth-divider"><span>OR</span></div>
+
+        <p class="auth-switch">
+          Already have an account? <a href="login.html">Sign in here</a>
+        </p>
+      </form>
+    </div>
+
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+  <script>
+    // Live password strength checker
+    document.getElementById('regPassword').addEventListener('input', function() {
+      checkPasswordStrength(this.value);
+    });
+  </script>
+</body>
+</html>
